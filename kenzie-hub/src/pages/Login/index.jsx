@@ -1,15 +1,16 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import api from "../../services/api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Container, Form } from "../Login/styles";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useState } from "react";
+
+import { useState, useContext } from "react";
 import { BiShow } from "react-icons/bi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { UserContext } from "../../Providers/Register e Login";
 
 const Login = () => {
+  const { userLogin } = useContext(UserContext);
   const formSchema = yup.object().shape({
     email: yup
       .string()
@@ -36,20 +37,10 @@ const Login = () => {
   const [load, setLoad] = useState(false);
   let navigate = useNavigate();
 
-  const onSubmitFunction = (data) => {
+  const onSubmitFunction = async (data) => {
     setLoad(true);
-    api
-      .post("/sessions", data)
-      .then((response) => {
-        localStorage.setItem("@TOKEN", response.data.token);
-        localStorage.setItem("@USERID", response.data.user.id);
-        navigate("/dashboard");
-        setLoad(false);
-      })
-      .catch(() => {
-        toast.error("Login ou senha incorreta");
-        setLoad(false);
-      });
+    await userLogin(data);
+    setLoad(false);
   };
   const [showPassword, setShowPassword] = useState(false);
   return (

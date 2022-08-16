@@ -71,7 +71,8 @@ export const Form = styled.form`
     }
   }
   p {
-    color: white;
+    color: red;
+    margin: 0;
   }
   input {
     border: none;
@@ -98,6 +99,17 @@ export const Form = styled.form`
     height: 2.5rem;
     width: 15rem;
     margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  .btnEntrar {
+    background-color: #ff577f;
+  }
+
+  .btnEntrar:hover {
+    cursor: pointer;
+    background-color: #e2305b;
+    transition: 1s;
   }
 
   .btnCadastre {
@@ -108,5 +120,12 @@ export const Form = styled.form`
     color: white;
     height: 2.5rem;
     width: 15rem;
+    cursor: pointer;
+  }
+
+  .btnCadastre:hover {
+    background: #868e9652;
+    cursor: pointer;
+    transition: 1s;
   }
 `;

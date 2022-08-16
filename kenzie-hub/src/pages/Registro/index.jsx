@@ -1,12 +1,13 @@
 import { Header, Form, Container, DivDescr } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import api from "../../services/api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../../Providers/Register e Login";
 
 const Registro = () => {
+  const { userRegister } = useContext(UserContext);
   const formSchema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
     email: yup
@@ -39,14 +40,9 @@ const Registro = () => {
 
   let navigate = useNavigate();
 
-  const onSubmitFunction = (data) => {
-    api
-      .post("/users", data)
-      .then((response) => {
-        response.status === 201 && navigate("/");
-        toast.success("Conta criada com sucesso!");
-      })
-      .catch(() => toast.error("Ops! algo deu errado"));
+  const onSubmitFunction = async (data) => {
+    await userRegister(data);
+  
   };
 
   return (
@@ -54,7 +50,7 @@ const Registro = () => {
       <Container>
         <Header>
           <h1>Kenzie Hub</h1>
-          <button  onClick={() => navigate("/")}>Voltar</button>
+          <button onClick={() => navigate("/")}>Voltar</button>
         </Header>
         <Form onSubmit={handleSubmit(onSubmitFunction)}>
           <DivDescr>

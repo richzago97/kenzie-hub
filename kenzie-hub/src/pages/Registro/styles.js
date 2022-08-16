@@ -33,6 +33,7 @@ export const Header = styled.div`
     padding: 0.4rem;
     width: 5rem;
     margin-right: 1rem;
+    cursor: pointer;
   }
 `;
 
@@ -115,6 +116,7 @@ export const Form = styled.form`
 
   .divBtnRegister {
     height: 5rem;
+    cursor: pointer;
   }
   button {
     border: none;
@@ -125,9 +127,11 @@ export const Form = styled.form`
     border-radius: 4px;
     color: white;
     margin-top: 1rem;
+    cursor: pointer;
   }
 
   button:hover {
     background: #ff427f;
+    cursor: pointer;
   }
 `;
