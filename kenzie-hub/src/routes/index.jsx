@@ -8,6 +8,7 @@ const RoutesMain = () => {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Registro />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="*" element={<Login />} />
     </Routes>
   );
 };

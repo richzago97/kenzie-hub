@@ -16,15 +16,19 @@ const Dashboard = () => {
 
   useEffect(() => {
     const UserID = localStorage.getItem("@USERID");
-    api
-      .get(`/users/${UserID}`)
-      .then((response) => {
-        setatualizarTech(response.data.techs);
-      })
-      .catch(() => {
-        localStorage.removeItem("@USERID");
-        localStorage.removeItem("@TOKEN");
-      });
+    if (UserID) {
+      api
+        .get(`/users/${UserID}`)
+        .then((response) => {
+          setatualizarTech(response.data.techs);
+        })
+        .catch(() => {
+          localStorage.removeItem("@USERID");
+          localStorage.removeItem("@TOKEN");
+        });
+    } else {
+      navigate("/");
+    }
   }, [atualizarTech]);
 
   return (
@@ -35,6 +39,7 @@ const Dashboard = () => {
           onClick={() => {
             navigate("/");
             localStorage.removeItem("@TOKEN");
+            localStorage.removeItem("@USERID");
           }}
         >
           Sair
