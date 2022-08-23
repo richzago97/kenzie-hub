@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Registro from "../pages/Registro";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
+
 const RoutesMain = () => {
   return (
     <Routes>

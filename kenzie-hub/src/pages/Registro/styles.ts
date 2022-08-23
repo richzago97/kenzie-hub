@@ -35,6 +35,12 @@ export const Header = styled.div`
     margin-right: 1rem;
     cursor: pointer;
   }
+
+  button:hover {
+    cursor: pointer;
+    transition: 1s;
+    background-color: #404850;
+  }
 `;
 
 export const DivDescr = styled.div`
@@ -69,6 +75,9 @@ export const Form = styled.form`
     flex-direction: column;
     align-items: baseline;
     color: white;
+    input {
+      border: 1px solid black;
+    }
   }
 
   .divSelect {
@@ -87,7 +96,6 @@ export const Form = styled.form`
     margin: 0;
   }
   input {
-    border: none;
     background: #343b41;
     border: 0.973988px solid #343b41;
     border-radius: 3.19812px;
@@ -98,18 +106,18 @@ export const Form = styled.form`
 
   select {
     background-color: #343b41;
-    border: none;
-    border: 1.2182px solid #343b41;
+    border: 1px solid black;
     border-radius: 4px;
     color: white;
+
+    margin-top: 1rem;
 
     width: 16.6rem;
     height: 2.6rem;
   }
   option {
     background-color: #343b41;
-    border: none;
-    border: 1.2182px solid #343b41;
+    border: 1px solid black;
     border-radius: 4px;
     color: white;
   }

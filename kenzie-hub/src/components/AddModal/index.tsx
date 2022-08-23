@@ -2,10 +2,17 @@ import { Container, Header, Form, Teste } from "./styles";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { TechContext } from "../../Providers/TechContext/TechContext";
+import {
+  IDataTech,
+  TechContext,
+} from "../../Providers/TechContext/TechContext";
 import { useContext, useState } from "react";
 
-function Modal({ techModal }) {
+interface ITechModalProps {
+  techModal: () => void;
+}
+
+function Modal({ techModal }: ITechModalProps) {
   const { createTech } = useContext(TechContext);
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
@@ -16,15 +23,15 @@ function Modal({ techModal }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IDataTech>({
     resolver: yupResolver(formSchema),
   });
 
   const [load, setLoad] = useState(false);
 
-  const onSubmitFunction = async (data) => {
+  const onSubmitFunction = (data: IDataTech) => {
     setLoad(true);
-    await createTech(data, techModal);
+    createTech(data);
     setTimeout(() => {
       setLoad(false);
     }, 1000);

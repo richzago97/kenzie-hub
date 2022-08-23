@@ -1,13 +1,14 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Container, Form } from "../Login/styles";
+import { Container, Form } from "./styles";
 import { useNavigate } from "react-router-dom";
 
 import { useState, useContext } from "react";
 import { BiShow } from "react-icons/bi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { UserContext } from "../../Providers/Register e Login";
+import { IDataLogin, UserContext } from "../../Providers/Register e Login";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const { userLogin } = useContext(UserContext);
@@ -31,20 +32,25 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IDataLogin>({
     resolver: yupResolver(formSchema),
   });
   const [load, setLoad] = useState(false);
   let navigate = useNavigate();
 
-  const onSubmitFunction = async (data) => {
+  const onSubmitFunction = (data: IDataLogin) => {
     setLoad(true);
-    await userLogin(data);
+    userLogin(data);
     setLoad(false);
   };
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0.9 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <Container>
         <h1>Kenzie Hub</h1>
 
@@ -60,6 +66,8 @@ const Login = () => {
                 {...register("email")}
               />
             </div>
+          </div>
+          <div className="error">
             <p>{errors.email?.message}</p>
           </div>
 
@@ -81,8 +89,9 @@ const Login = () => {
                 )}
               </div>
             </div>
-
-            <p>{errors.password?.message}</p>
+          </div>
+          <div className="error">
+            <p>{errors.email?.message}</p>
           </div>
 
           <div className="divBtns">
@@ -102,7 +111,7 @@ const Login = () => {
           </div>
         </Form>
       </Container>
-    </>
+    </motion.div>
   );
 };
 export default Login;

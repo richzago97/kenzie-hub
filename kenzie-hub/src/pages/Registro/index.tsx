@@ -4,7 +4,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../Providers/Register e Login";
+import { IDataRegister, UserContext } from "../../Providers/Register e Login";
+import { motion } from "framer-motion";
 
 const Registro = () => {
   const { userRegister } = useContext(UserContext);
@@ -34,19 +35,23 @@ const Registro = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IDataRegister>({
     resolver: yupResolver(formSchema),
   });
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const onSubmitFunction = async (data) => {
-    await userRegister(data);
-  
+  const onSubmitFunction =  (data: IDataRegister) => {
+     userRegister(data);
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0.9 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <Container>
         <Header>
           <h1>Kenzie Hub</h1>
@@ -141,7 +146,7 @@ const Registro = () => {
           </div>
         </Form>
       </Container>
-    </>
+    </motion.div>
   );
 };
 export default Registro;

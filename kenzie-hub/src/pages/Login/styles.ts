@@ -59,6 +59,9 @@ export const Form = styled.form`
     align-items: flex-start;
     margin: 3px;
     gap: 10px;
+    input {
+      padding: 5px;
+    }
   }
 
   .divPassword {
@@ -70,9 +73,20 @@ export const Form = styled.form`
       color: white;
     }
   }
+
+  .error {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 2rem;
+    margin-top: -0.6rem;
+  }
+
+
   p {
     color: red;
-    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin: 0px;
   }
   input {
     border: none;
