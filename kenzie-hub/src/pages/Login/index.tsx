@@ -36,7 +36,7 @@ const Login = () => {
     resolver: yupResolver(formSchema),
   });
   const [load, setLoad] = useState(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmitFunction = (data: IDataLogin) => {
     setLoad(true);
